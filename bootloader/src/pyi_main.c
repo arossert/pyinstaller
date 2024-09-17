@@ -371,6 +371,17 @@ pyi_main(struct PYI_CONTEXT *pyi_ctx)
             return -1;
         }
 #endif
+
+        env_var_value = pyi_getenv;
+        if (env_var_value) {
+            PYI_DEBUG("LOADER: _PYI_ONEDIR_APPLICATION_HOME_DIR is set, Setting application_home_dir to : %s\n", env_var_value);
+            /* Copy the application's top-level directory from environment */
+            if (snprintf(pyi_ctx->application_home_dir, PYI_PATH_MAX, "%s", env_var_value) >= PYI_PATH_MAX) {
+                PYI_ERROR("Path exceeds PYI_PATH_MAX limit.\n");
+                free(env_var_value);
+                return -1;
+            }
+        }
     }
 
     PYI_DEBUG("LOADER: application's top-level directory: %s\n", pyi_ctx->application_home_dir);
