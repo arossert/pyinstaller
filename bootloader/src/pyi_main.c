@@ -372,7 +372,7 @@ pyi_main(struct PYI_CONTEXT *pyi_ctx)
         }
 #endif
 
-        env_var_value = pyi_getenv;
+        env_var_value = pyi_getenv("_PYI_ONEDIR_APPLICATION_HOME_DIR");
         if (env_var_value) {
             PYI_DEBUG("LOADER: _PYI_ONEDIR_APPLICATION_HOME_DIR is set, Setting application_home_dir to : %s\n", env_var_value);
             /* Copy the application's top-level directory from environment */
